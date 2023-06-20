@@ -11,6 +11,6 @@ export default function TftLayout({
   children: React.ReactNode
 }) {
   return (
-      {children}
+    <div>{children}</div>
   )
 }
