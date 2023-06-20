@@ -11,6 +11,6 @@ export default function ValorantLayout({
   children: React.ReactNode
 }) {
   return (
-      <main className='bg-gray-900 h-screen'>{children}</main>
+      {children}
   )
 }
