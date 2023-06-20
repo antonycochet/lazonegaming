@@ -11,6 +11,6 @@ export default function TftLayout({
   children: React.ReactNode
 }) {
   return (
-      <main className='bg-hextech-blue-6 h-screen'>{children}</main>
+      {children}
   )
 }
