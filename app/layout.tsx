@@ -1,6 +1,4 @@
 import type { Metadata } from 'next'
- 
-// These styles apply to every route in the application
 import '../styles/global.css'
  
 export const metadata: Metadata = {

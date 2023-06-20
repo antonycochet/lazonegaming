@@ -1,25 +1,31 @@
 import * as motion from '../lib/motion'
+import Link from 'next/link'
+
+const games: string[] = ['tft','valorant']
 
 export default function Page() {
     return (
         <main className="flex items-center justify-center h-screen">
             <div className="flex-col">
-                <h1 className="text-7xl text-white font-bold text-center pb-28">LA ZONE GAMING</h1>
-                <div className="flex gap-10">
-                <motion.div 
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="max-w-[700px] overflow-hidden p-2">
-                    <img src="./images/tft.jpg" className="hover:scale-110 transition duration-300 cursor-pointer object-cover"></img>
-                </motion.div>
-                <motion.div 
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="max-w-[700px] overflow-hidden p-2">
-                    <img src="./images/valorant.jpg" className="hover:scale-110 transition duration-300 cursor-pointer object-cover"></img>
-                </motion.div>
+                <h1 className="text-9xl text-white font-bold tracking-tighter mb-16">LA ZONE GAMING</h1>
+                <div className="flex gap-16">
+                    {games.map((game) => {
+                        return(
+                            <div className='flex-col group relative'>
+                                <h1 className="text-8xl text-white font-bold ml-4 opacity-0 group-hover:opacity-100 duration-300 absolute -bottom-6 z-10">{game.toUpperCase()}</h1>
+                                <motion.div 
+                                    initial={{ opacity: 0, scale: .5 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: .3 }}
+                                    className="max-w-[700px] overflow-hidden"
+                                >
+                                    <Link href={`/${game}`}>
+                                        <img src={`./images/${game}.jpg`} className="group-hover:scale-125 group-hover:rotate-3 transition duration-300 object-cover shadow-2xl"/>
+                                    </Link>
+                                </motion.div>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
         </main>
