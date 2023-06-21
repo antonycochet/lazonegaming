@@ -26,7 +26,8 @@ const preprocess = (init: RequestInit): RequestInit => {
     return {
         ...init,
         headers: {
-            "X-Riot-Token": process.env.RIOT_API_KEY
+            "X-Riot-Token": process.env.RIOT_API_KEY as string,
+            ...(init.headers ?? {})
         }
     };
 }
