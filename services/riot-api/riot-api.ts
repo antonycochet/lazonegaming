@@ -5,7 +5,7 @@
  * @param {string} url The url to send the request to.
  * @param {RequestInit} init The request init object.
  */
-export const api = async <T>(url: string, init: RequestInit = {}): Promise<T> => {
+export const apiRiot = async <T>(url: string, init: RequestInit = {}): Promise<T> => {
     return fetch(`${process.env.RIOT_API_URL}${url}`, preprocess(init))
         .then(res => res.json())
         .catch((error: Response) => {
