@@ -3,14 +3,70 @@ version: "3"
 services:
   web:
     build:
-      context: .
+      context: ./web
       dockerfile: Dockerfile
+    environment:
+      - RIOT_API_KEY=${RIOT_API_KEY}
+      - RIOT_API_URL=${RIOT_API_URL}
+      - MONGODB_URL=${MONGODB_URL}
+      - MONGODB_DBNAME=${MONGODB_DBNAME}
     container_name: web
     restart: always
     volumes:
-      - ./:/app
-      - /app/node_modules
-      - /app/.next
+      - ./web:/app
     ports:
-      - 3000:3000
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    networks:
+      - node-network
 
+  bot-discord:
+    build:
+      context: ./bot-discord
+      dockerfile: Dockerfile
+    environment:
+      CLIENT_ID: ${CLIENT_ID}
+      GUILD_ID: ${GUILD_ID}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
+    container_name: bot-discord
+    restart: always
+    volumes:
+      - ./bot-discord:/usr/src/bot
+    ports:
+      - "3030:3030"
+    depends_on:
+      - web
+    networks:
+      - node-network
+
+  apollo-server:
+    build:
+      context: ./apollo-server
+      dockerfile: Dockerfile
+    container_name: apollo-server
+    volumes:
+      - ./apollo-server:/app
+    ports:
+      - "7070:7070"
+    depends_on:
+      - web
+    networks:
+      - node-network
+
+  #bdd
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - node-network
+
+volumes:
+  dbdata6:
+
+networks:
+  node-network:
+    driver: bridge
