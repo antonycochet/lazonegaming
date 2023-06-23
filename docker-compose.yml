@@ -13,4 +13,26 @@ services:
       - /app/.next
     ports:
       - 3000:3000
+    networks:
+      - gaming
 
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+    networks:
+      - gaming
+
+networks:
+  gaming:
+    driver: bridge
+
+volumes:
+  web:
+    driver: local
+  mongodb:
+    driver: local
