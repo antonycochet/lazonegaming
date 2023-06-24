@@ -9,7 +9,6 @@ const bot = require('./services/discord.js').bot;
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 bot.once(Events.ClientReady, c => {
     console.log(`Ready! Logged in as ${c.user.tag}`);
-    console.log("ok");
 });
 
 bot.commands = new Collection();
@@ -50,6 +49,6 @@ bot.on(Events.InteractionCreate, async interaction => {
     }
 });
 
-console.log("TOKEN :", process.env.DISCORD_TOKEN)
+console.log(process.env.DISCORD_TOKEN)
 
 bot.login(process.env.DISCORD_TOKEN)
