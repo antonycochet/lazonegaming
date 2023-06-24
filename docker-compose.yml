@@ -26,9 +26,9 @@ services:
       context: ./bot-discord
       dockerfile: Dockerfile
     environment:
-      - CLIENT_ID: ${CLIENT_ID}
-      - GUILD_ID: ${GUILD_ID}
-      - DISCORD_TOKEN: ${DISCORD_TOKEN}
+      CLIENT_ID: ${CLIENT_ID}
+      GUILD_ID: ${GUILD_ID}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
     container_name: bot-discord
     restart: always
     volumes:
