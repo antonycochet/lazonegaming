@@ -23,15 +23,15 @@ services:
       context: ./bot-discord
       dockerfile: Dockerfile
     environment:
-      - DISCORD_TOKEN=MTEyMTUyOTAxMDkyMTQyMjg3OA.GVyNgm.NgnvGK8qGfMTaiKT-z9sQTLvP7dXvLzgDSyINU
-      - CLIENT_ID=1121529010921422878
-      - GUILD_ID=708726270367891528
+      CLIENT_ID: ${CLIENT_ID}
+      GUILD_ID: ${GUILD_ID}
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
     container_name: bot-discord
     restart: always
     volumes:
-      - ./bot-discord:/app
+      - ./bot-discord:/usr/src/bot
     ports:
-      - 3030:3030
+      - "3030:3030"
     depends_on:
       - web
     networks:
@@ -42,16 +42,15 @@ services:
       context: ./apollo-server
       dockerfile: Dockerfile
     container_name: apollo-server
-    restart: always
     volumes:
       - ./apollo-server:/app
     ports:
-      - 7070:7070
+      - "7070:7070"
     depends_on:
       - web
     networks:
       - node-network
-      
+
   #bdd
   mongodb:
     image: mongo
