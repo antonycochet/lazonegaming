@@ -4,7 +4,7 @@ RUN mkdir -p /app
 
 WORKDIR /app
 
-COPY ./index.js ./package*.json /app
+COPY ./index.js ./package*.json /app/
 
 RUN npm install
 
