@@ -51,4 +51,15 @@ bot.on(Events.InteractionCreate, async interaction => {
 
 console.log(process.env.DISCORD_TOKEN)
 
+bot.on('messageCreate', async (message) => {
+    if (message.content.toLowerCase().includes('quoi')) {
+        // Reply in a thread
+        const thread = await message.startThread({
+            name: 'Response Thread',
+            autoArchiveDuration: 60, // Automatically archive the thread after 1 hour (in minutes)
+        });
+        thread.send('feur ?');
+    }
+});
+
 bot.login(process.env.DISCORD_TOKEN)
