@@ -7,14 +7,7 @@
  */
 export const apiRiot = async <T>(url: string, init: RequestInit = {}): Promise<T> => {
     return fetch(`${process.env.RIOT_API_URL}${url}`, preprocess(init))
-        .then(res => res.json())
-        .catch((error: Response) => {
-            if (!error.ok) {
-                throw new Error(error.statusText);
-            }
-
-            return error;
-        });
+        .then(res => res.json());
 };
 
 /**

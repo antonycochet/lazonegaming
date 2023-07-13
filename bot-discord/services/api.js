@@ -7,7 +7,10 @@ const api = (url, options) => {
     return fetch(base + url, options)
         .then(res => {
             if (!res.ok) {
-                throw new Error('Network response was not ok');
+                return res.json()
+                    .then(err => {
+                        throw err;
+                    })
             }
 
             return res.json();
